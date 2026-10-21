@@ -79,6 +79,14 @@
         display: none !important;
       }
     }
+    select option[value="F. Addis"] {
+      color: #ef4444 !important;
+      font-weight: 700 !important;
+    }
+    select option:not([value="F. Addis"]) {
+      color: #f8fafc;
+      background-color: #0b0f17;
+    }
   </style>
 </head>
 <body class="bg-gunmetal-900 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-brass-500 selection:text-gunmetal-900">
@@ -104,14 +112,21 @@
       <div class="flex items-center gap-3">
         <div class="hidden sm:flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-gunmetal-700/60 border border-gunmetal-600 text-xs text-slate-300">
           <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span class="flex items-center gap-1">Station: <input type="text" id="topStationInput" value="" placeholder="Enter station..." class="bg-gunmetal-900/90 border border-gunmetal-600 rounded px-2 py-0.5 text-xs text-white placeholder-slate-500 w-28 focus:outline-none focus:border-brass-500"><strong id="topStationName" class="text-white hidden"></strong></span>
+          <span class="flex items-center gap-1">Station: <select id="topStationInput" class="bg-gunmetal-900/90 border border-gunmetal-600 rounded px-2 py-0.5 text-xs text-white font-semibold focus:outline-none focus:border-brass-500">
+            <option value="" selected>-- Select Station --</option>
+            <option value="Gun Counter">Gun Counter</option>
+            <option value="Dylan's Desk">Dylan's Desk</option>
+            <option value="Faron's Office">Faron's Office</option>
+            <option value="Front Desk">Front Desk</option>
+          </select><strong id="topStationName" class="text-white hidden"></strong></span>
           <span class="text-slate-500">|</span>
           <span class="flex items-center gap-1">Clerk: <select id="topClerkSelect" class="bg-gunmetal-900/90 border border-gunmetal-600 rounded px-2 py-0.5 text-xs text-brass-400 font-semibold focus:outline-none focus:border-brass-500">
             <option value="" selected>-- Select Clerk --</option>
-            <option value="F. Addis">F. Addis</option>
+            <option value="F. Addis" class="text-red-500 font-bold" style="color: #ef4444; font-weight: 700;">F. Addis</option>
             <option value="D. Brasier">D. Brasier</option>
             <option value="C. Angel">C. Angel</option>
             <option value="F. Meeker">F. Meeker</option>
+            <option value="E. Witte">E. Witte</option>
           </select><strong id="topClerkName" class="text-brass-400 hidden"></strong></span>
         </div>
         <div class="flex items-center space-x-1.5">
@@ -227,7 +242,7 @@
                 </div>
               </div>
 
-              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
+              <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 pt-1">
                 <div>
                   <label for="inputCategory" class="block text-xs font-medium text-slate-300 mb-1">Category</label>
                   <select id="inputCategory" class="w-full bg-gunmetal-900 border border-gunmetal-600 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-brass-500">
@@ -246,8 +261,12 @@
                   <input type="text" id="inputSerial" placeholder="For FFL Intake Slip" class="w-full bg-gunmetal-900 border border-gunmetal-600 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-brass-500">
                 </div>
                 <div>
-                  <label for="inputCustomerName" class="block text-xs font-medium text-slate-300 mb-1">Customer Name (Optional)</label>
-                  <input type="text" id="inputCustomerName" placeholder="e.g. John Doe" class="w-full bg-gunmetal-900 border border-gunmetal-600 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-brass-500">
+                  <label for="inputCustomerName" class="block text-xs font-medium text-slate-300 mb-1">Customer Name <span class="text-rose-400 font-bold">(REQUIRED)</span></label>
+                  <input type="text" id="inputCustomerName" required placeholder="Required — e.g. John Doe" class="w-full bg-gunmetal-900 border border-rose-500/50 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-brass-500">
+                </div>
+                <div>
+                  <label for="inputCustomerPhone" class="block text-xs font-medium text-slate-300 mb-1">Phone Number</label>
+                  <input type="tel" id="inputCustomerPhone" placeholder="e.g. (555) 234-5678" class="w-full bg-gunmetal-900 border border-gunmetal-600 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-brass-500">
                 </div>
               </div>
 
@@ -749,33 +768,33 @@
                 </div>
               </div>
 
-              <!-- STORE CREDIT / TRADE-IN OFFER (WITH BONUS) -->
+              <!-- TRADE-IN OFFER (WITH BONUS) -->
               <div class="bg-gunmetal-900/90 border border-brass-500/40 rounded-xl p-3.5 relative shadow-sm">
                 <div class="flex items-center justify-between">
                   <div>
                     <span class="text-xs font-bold uppercase tracking-wider text-brass-400 flex items-center gap-1">
                       <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
-                      Store Credit / Trade-In Offer
+                      Trade-In Offer
                     </span>
-                    <span class="text-[11px] text-slate-400">Includes <span id="displayTradeBonusPct" class="text-brass-400 font-semibold">+15%</span> Trade-In Boost</span>
+                    <span class="text-[11px] text-slate-400">Includes <span id="displayTradeBonusPct" class="text-brass-400 font-semibold">10%</span> Trade-In Boost</span>
                   </div>
                   <div class="text-right">
-                    <span class="text-2xl font-extrabold text-brass-400 font-mono-numbers" id="calcTradeOffer">$304.00</span>
+                    <span class="text-2xl font-extrabold text-brass-400 font-mono-numbers" id="calcTradeOffer">$290.00</span>
                   </div>
                 </div>
                 <div class="mt-2 pt-2 border-t border-gunmetal-800 flex justify-between items-center text-[11px] text-slate-400">
-                  <span>Customer Gains: <strong class="text-brass-300 font-mono-numbers" id="calcTradeDelta">+$40.00 vs Cash</strong></span>
-                  <span>Trade Margin: <strong class="text-slate-200 font-mono-numbers" id="calcTradeMargin">25.1%</strong></span>
+                  <span>Customer Gains: <strong class="text-brass-300 font-mono-numbers" id="calcTradeDelta">+$26.00 vs Cash</strong></span>
+                  <span>Trade Margin: <strong class="text-slate-200 font-mono-numbers" id="calcTradeMargin">28.6%</strong></span>
                 </div>
               </div>
 
               <!-- CONSIGNMENT ESTIMATE -->
               <div class="bg-gunmetal-900/60 border border-gunmetal-700 rounded-xl p-3 text-xs">
                 <div class="flex justify-between items-center">
-                  <span class="text-slate-300 font-medium">Consignment Payout (at 15% Store Fee):</span>
-                  <span class="font-mono-numbers font-bold text-slate-200" id="calcConsignmentPayout">$345.00</span>
+                  <span class="text-slate-300 font-medium">Consignment Payout (at <span id="displayConsignmentFeeLabel">$50</span> Store Fee):</span>
+                  <span class="font-mono-numbers font-bold text-slate-200" id="calcConsignmentPayout">$356.00</span>
                 </div>
-                <p class="text-[10px] text-slate-500 mt-0.5">Paid upon sale in retail case; store keeps $61.00 fee.</p>
+                <p class="text-[10px] text-slate-500 mt-0.5">Paid upon sale in retail case; store keeps <span id="calcConsignmentFeeAmount">$50.00</span> fee.</p>
               </div>
 
             </div>
@@ -799,7 +818,7 @@
                   <span class="font-mono-numbers font-bold text-emerald-400" id="calcRangeTarget">$264.00</span>
                 </div>
                 <div class="bg-amber-950/30 p-2 rounded-lg border border-amber-800/50">
-                  <span class="text-[10px] text-amber-400 block">Max Ceiling (Mgr)</span>
+                  <span class="text-[10px] text-amber-400 block">Max Ceiling (FARON)</span>
                   <span class="font-mono-numbers font-bold text-amber-300" id="calcRangeHigh">$285.00</span>
                 </div>
               </div>
@@ -879,20 +898,34 @@
             </div>
           </div>
 
-          <!-- Quick Live Margin Slider for Counter Clerk -->
-          <div class="bg-gunmetal-800 border border-gunmetal-700 rounded-xl p-4 shadow-sm text-xs">
-            <div class="flex justify-between items-center mb-2">
-              <div>
-                <span class="font-semibold text-slate-200 block">Live Margin Override Slider</span>
-                <span id="categoryRuleIndicator" class="text-[10px] text-emerald-400">Auto-Tier: Fast-Mover Handgun (68% Offer / 32% Margin)</span>
-              </div>
-              <span id="sliderMarginValue" class="font-mono text-brass-400 font-bold">65% Cash Offer (35% Margin)</span>
+          <!-- Quick Live Margin Slider & Special Customer Toggle for Counter Clerk -->
+          <div class="bg-gunmetal-800 border border-gunmetal-700 rounded-xl p-4 shadow-sm text-xs space-y-3">
+            <div class="flex items-center justify-between bg-gunmetal-900/90 border border-brass-500/40 rounded-lg p-2.5">
+              <label for="chkSpecialCustomer" class="flex items-center space-x-2 cursor-pointer select-none">
+                <input type="checkbox" id="chkSpecialCustomer" class="w-4 h-4 rounded bg-gunmetal-800 border-brass-500 text-brass-500 focus:ring-brass-500 cursor-pointer">
+                <div>
+                  <span class="font-bold text-brass-400 block">Special Customer (25% Margin)</span>
+                  <span class="text-[10px] text-slate-400">Sets store target margin to 25% (75% Cash Offer)</span>
+                </div>
+              </label>
+              <span id="specialCustomerBadge" class="hidden px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">25% MARGIN ACTIVE</span>
             </div>
-            <input type="range" id="inputOfferPercentSlider" min="50" max="80" value="65" class="w-full h-1.5 bg-gunmetal-900 rounded-lg appearance-none cursor-pointer accent-brass-500">
-            <div class="flex justify-between text-[10px] text-slate-400 mt-1">
-              <span>50% (50% Margin - Lowball)</span>
-              <span>65% (Standard)</span>
-              <span>80% (20% Margin - Aggressive)</span>
+
+            <div>
+              <div class="flex justify-between items-center mb-2">
+                <div>
+                  <span class="font-semibold text-slate-200 block">Live Margin Override Slider</span>
+                  <span id="categoryRuleIndicator" class="text-[10px] text-emerald-400">Auto-Tier: Fast-Mover Handgun (68% Offer / 32% Margin)</span>
+                </div>
+                <span id="sliderMarginValue" class="font-mono text-brass-400 font-bold">65% Cash Offer (35% Margin)</span>
+              </div>
+              <input type="range" id="inputOfferPercentSlider" min="50" max="80" value="65" class="w-full h-1.5 bg-gunmetal-900 rounded-lg appearance-none cursor-pointer accent-brass-500">
+              <div class="flex justify-between text-[10px] text-slate-400 mt-1">
+                <span>50% (50% Margin - Lowball)</span>
+                <span>65% (Standard)</span>
+                <span>75% (25% Special)</span>
+                <span>80% (20% Margin)</span>
+              </div>
             </div>
           </div>
 
@@ -1019,7 +1052,7 @@
             <svg class="w-3.5 h-3.5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
             <span>Export CSV</span>
           </button>
-          <button id="btnSeedSampleLog" class="bg-gunmetal-700 hover:bg-gunmetal-600 text-slate-300 font-medium px-3 py-1.5 rounded-lg text-xs transition border border-gunmetal-600">
+          <button id="btnSeedSampleLog" class="hidden bg-gunmetal-700 hover:bg-gunmetal-600 text-slate-300 font-medium px-3 py-1.5 rounded-lg text-xs transition border border-gunmetal-600">
             Load Sample Data
           </button>
           <button id="btnClearLog" class="bg-rose-950/40 hover:bg-rose-900/50 text-rose-300 font-medium px-3 py-1.5 rounded-lg text-xs transition border border-rose-800/40">
@@ -1216,7 +1249,7 @@
     <!-- ========================================== -->
     <section id="tab-settings" class="tab-content space-y-5 hidden">
       
-      <div class="bg-gunmetal-800 border border-gunmetal-700 rounded-xl p-5 shadow-sm max-w-3xl">
+      <div class="bg-gunmetal-800 border border-gunmetal-700 rounded-xl p-5 shadow-sm max-w-5xl">
         <h2 class="text-base font-bold text-white mb-1">Store Target Margins &amp; Station Configuration</h2>
         <p class="text-xs text-slate-400 mb-5">These parameters govern the valuation formulas and default offers across all counter clerks.</p>
 
@@ -1228,16 +1261,23 @@
             </div>
             <div>
               <label for="settingStationName" class="block font-semibold text-slate-200 mb-1">Counter Station</label>
-              <input type="text" id="settingStationName" value="" placeholder="Enter station (e.g. Counter #1)" class="w-full bg-gunmetal-900 border border-gunmetal-600 rounded-lg px-3 py-2 text-white placeholder-slate-500 focus:outline-none focus:border-brass-500">
+              <select id="settingStationName" class="w-full bg-gunmetal-900 border border-gunmetal-600 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-brass-500">
+                <option value="" selected>-- Select Station --</option>
+                <option value="Gun Counter">Gun Counter</option>
+                <option value="Dylan's Desk">Dylan's Desk</option>
+                <option value="Faron's Office">Faron's Office</option>
+                <option value="Front Desk">Front Desk</option>
+              </select>
             </div>
             <div>
               <label for="settingStationClerk" class="block font-semibold text-slate-200 mb-1">Default Counter Clerk / Appraiser</label>
               <select id="settingStationClerk" class="w-full bg-gunmetal-900 border border-gunmetal-600 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-brass-500">
                 <option value="" selected>-- Select Counter Clerk --</option>
-                <option value="F. Addis">F. Addis</option>
+                <option value="F. Addis" class="text-red-500 font-bold" style="color: #ef4444; font-weight: 700;">F. Addis</option>
                 <option value="D. Brasier">D. Brasier</option>
                 <option value="C. Angel">C. Angel</option>
                 <option value="F. Meeker">F. Meeker</option>
+                <option value="E. Witte">E. Witte</option>
               </select>
             </div>
           </div>
@@ -1253,21 +1293,239 @@
             </div>
 
             <div>
-              <label for="settingTradeBonus" class="block font-semibold text-brass-400 mb-1">Trade-In Credit Bonus %</label>
+              <label for="settingTradeBonus" class="block font-semibold text-brass-400 mb-1">Trade-In Boost %</label>
               <div class="relative">
-                <input type="number" id="settingTradeBonus" min="0" max="30" value="15" class="w-full bg-gunmetal-900 border border-gunmetal-600 rounded-lg px-3 py-2 text-white font-mono focus:outline-none focus:border-brass-500">
+                <input type="number" id="settingTradeBonus" min="0" max="30" value="10" class="w-full bg-gunmetal-900 border border-gunmetal-600 rounded-lg px-3 py-2 text-white font-mono focus:outline-none focus:border-brass-500">
                 <span class="absolute right-3 top-2 text-slate-400">%</span>
               </div>
-              <p class="text-[10px] text-slate-400 mt-1">Additional credit awarded if used toward store inventory.</p>
+              <p class="text-[10px] text-slate-400 mt-1">10% Trade-In Boost added when used toward store inventory.</p>
             </div>
 
             <div>
-              <label for="settingConsignmentFee" class="block font-semibold text-slate-200 mb-1">Consignment Store Fee %</label>
+              <label for="settingConsignmentFee" class="block font-semibold text-slate-200 mb-1">Consignment Store Fee ($)</label>
               <div class="relative">
-                <input type="number" id="settingConsignmentFee" min="5" max="35" value="15" class="w-full bg-gunmetal-900 border border-gunmetal-600 rounded-lg px-3 py-2 text-white font-mono focus:outline-none focus:border-brass-500">
-                <span class="absolute right-3 top-2 text-slate-400">%</span>
+                <span class="absolute left-3 top-2 text-slate-400 font-mono">$</span>
+                <input type="number" id="settingConsignmentFee" min="0" max="500" step="5" value="50" class="w-full bg-gunmetal-900 border border-gunmetal-600 rounded-lg pl-7 pr-3 py-2 text-white font-mono focus:outline-none focus:border-brass-500">
               </div>
-              <p class="text-[10px] text-slate-400 mt-1">Commission retained by store upon final customer sale.</p>
+              <p class="text-[10px] text-slate-400 mt-1">Flat dollar store fee retained upon final consignment sale ($50 default).</p>
+            </div>
+          </div>
+
+          <!-- Physical Condition Mark Up / Mark Down Margins -->
+          <div class="border-t border-gunmetal-700 pt-4 space-y-3">
+            <div class="flex items-center justify-between">
+              <div>
+                <h3 class="font-bold text-brass-400 text-xs uppercase tracking-wider">Physical Condition Mark Up / Mark Down Margins (%)</h3>
+                <p class="text-[11px] text-slate-400">Adjust the percentage markup (+) or markdown (-) applied to the Used Market Base for each NRA condition grade.</p>
+              </div>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-6 gap-3">
+              <div class="bg-gunmetal-900/80 p-2.5 rounded-lg border border-gunmetal-700">
+                <label for="settingCondNIB" class="block font-semibold text-emerald-400 text-[11px] mb-1">NIB / 100%</label>
+                <div class="relative">
+                  <input type="number" id="settingCondNIB" step="1" min="-50" max="50" value="5" class="w-full bg-gunmetal-800 border border-gunmetal-600 rounded px-2 py-1.5 text-white font-mono text-xs focus:outline-none focus:border-brass-500">
+                  <span class="absolute right-2 top-1.5 text-slate-400 text-[10px]">%</span>
+                </div>
+              </div>
+              <div class="bg-gunmetal-900/80 p-2.5 rounded-lg border border-gunmetal-700">
+                <label for="settingCondEXC" class="block font-semibold text-slate-200 text-[11px] mb-1">Exc / 98-95%</label>
+                <div class="relative">
+                  <input type="number" id="settingCondEXC" step="1" min="-80" max="50" value="-5" class="w-full bg-gunmetal-800 border border-gunmetal-600 rounded px-2 py-1.5 text-white font-mono text-xs focus:outline-none focus:border-brass-500">
+                  <span class="absolute right-2 top-1.5 text-slate-400 text-[10px]">%</span>
+                </div>
+              </div>
+              <div class="bg-gunmetal-900/80 p-2.5 rounded-lg border border-brass-500/40">
+                <label for="settingCondVG" class="block font-semibold text-brass-400 text-[11px] mb-1">VG / 90-85%</label>
+                <div class="relative">
+                  <input type="number" id="settingCondVG" step="1" min="-80" max="50" value="-15" class="w-full bg-gunmetal-800 border border-gunmetal-600 rounded px-2 py-1.5 text-white font-mono text-xs focus:outline-none focus:border-brass-500">
+                  <span class="absolute right-2 top-1.5 text-slate-400 text-[10px]">%</span>
+                </div>
+              </div>
+              <div class="bg-gunmetal-900/80 p-2.5 rounded-lg border border-gunmetal-700">
+                <label for="settingCondGOOD" class="block font-semibold text-amber-400 text-[11px] mb-1">Good / 80-75%</label>
+                <div class="relative">
+                  <input type="number" id="settingCondGOOD" step="1" min="-90" max="50" value="-25" class="w-full bg-gunmetal-800 border border-gunmetal-600 rounded px-2 py-1.5 text-white font-mono text-xs focus:outline-none focus:border-brass-500">
+                  <span class="absolute right-2 top-1.5 text-slate-400 text-[10px]">%</span>
+                </div>
+              </div>
+              <div class="bg-gunmetal-900/80 p-2.5 rounded-lg border border-gunmetal-700">
+                <label for="settingCondFAIR" class="block font-semibold text-orange-400 text-[11px] mb-1">Fair / 70-60%</label>
+                <div class="relative">
+                  <input type="number" id="settingCondFAIR" step="1" min="-95" max="50" value="-40" class="w-full bg-gunmetal-800 border border-gunmetal-600 rounded px-2 py-1.5 text-white font-mono text-xs focus:outline-none focus:border-brass-500">
+                  <span class="absolute right-2 top-1.5 text-slate-400 text-[10px]">%</span>
+                </div>
+              </div>
+              <div class="bg-gunmetal-900/80 p-2.5 rounded-lg border border-gunmetal-700">
+                <label for="settingCondPOOR" class="block font-semibold text-rose-400 text-[11px] mb-1">Poor / &lt;60%</label>
+                <div class="relative">
+                  <input type="number" id="settingCondPOOR" step="1" min="-95" max="50" value="-60" class="w-full bg-gunmetal-800 border border-gunmetal-600 rounded px-2 py-1.5 text-white font-mono text-xs focus:outline-none focus:border-brass-500">
+                  <span class="absolute right-2 top-1.5 text-slate-400 text-[10px]">%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Physical Condition Dropdown Pricing Adjustments ($) -->
+          <div class="border-t border-gunmetal-700 pt-4 space-y-3">
+            <div class="flex items-center justify-between">
+              <div>
+                <h3 class="font-bold text-brass-400 text-xs uppercase tracking-wider">Physical Condition Dropdown Pricing Adjustments ($)</h3>
+                <p class="text-[11px] text-slate-400">Customize all dollar add-ons (+), deductions (-), and reconditioning fees across every dropdown in Step 3 (Physical Condition &amp; NRA Grade).</p>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <!-- 1. Original Box & Paperwork -->
+              <div class="bg-gunmetal-900/80 p-3 rounded-lg border border-gunmetal-700 space-y-2">
+                <span class="font-bold text-slate-200 text-xs block border-b border-gunmetal-700 pb-1">Original Box &amp; Paperwork</span>
+                <div class="grid grid-cols-2 gap-2">
+                  <div>
+                    <label for="settingDrop_boxCase" class="block text-[11px] text-slate-400 mb-1">Factory Case + Manuals ($)</label>
+                    <input type="number" id="settingDrop_boxCase" step="1" value="35" class="w-full bg-gunmetal-800 border border-gunmetal-600 rounded px-2 py-1 text-emerald-400 font-mono text-xs focus:outline-none focus:border-brass-500">
+                  </div>
+                  <div>
+                    <label for="settingDrop_boxCardboard" class="block text-[11px] text-slate-400 mb-1">Cardboard / Partial Docs ($)</label>
+                    <input type="number" id="settingDrop_boxCardboard" step="1" value="15" class="w-full bg-gunmetal-800 border border-gunmetal-600 rounded px-2 py-1 text-emerald-400 font-mono text-xs focus:outline-none focus:border-brass-500">
+                  </div>
+                </div>
+              </div>
+
+              <!-- 2. Included Magazines -->
+              <div class="bg-gunmetal-900/80 p-3 rounded-lg border border-gunmetal-700 space-y-2">
+                <span class="font-bold text-slate-200 text-xs block border-b border-gunmetal-700 pb-1">Included Magazines</span>
+                <div class="grid grid-cols-3 gap-2">
+                  <div>
+                    <label for="settingDrop_mag3Plus" class="block text-[11px] text-slate-400 mb-1">3+ Factory Mags ($)</label>
+                    <input type="number" id="settingDrop_mag3Plus" step="1" value="25" class="w-full bg-gunmetal-800 border border-gunmetal-600 rounded px-2 py-1 text-emerald-400 font-mono text-xs focus:outline-none focus:border-brass-500">
+                  </div>
+                  <div>
+                    <label for="settingDrop_mag1Only" class="block text-[11px] text-slate-400 mb-1">1 Mag Only ($)</label>
+                    <input type="number" id="settingDrop_mag1Only" step="1" value="-20" class="w-full bg-gunmetal-800 border border-gunmetal-600 rounded px-2 py-1 text-rose-400 font-mono text-xs focus:outline-none focus:border-brass-500">
+                  </div>
+                  <div>
+                    <label for="settingDrop_mag0None" class="block text-[11px] text-slate-400 mb-1">0 Mags Included ($)</label>
+                    <input type="number" id="settingDrop_mag0None" step="1" value="-40" class="w-full bg-gunmetal-800 border border-gunmetal-600 rounded px-2 py-1 text-rose-400 font-mono text-xs focus:outline-none focus:border-brass-500">
+                  </div>
+                </div>
+              </div>
+
+              <!-- 3. Mounted Optic / Sight Upgrades -->
+              <div class="bg-gunmetal-900/80 p-3 rounded-lg border border-gunmetal-700 space-y-2">
+                <span class="font-bold text-slate-200 text-xs block border-b border-gunmetal-700 pb-1">Mounted Optic / Sight Upgrades</span>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                  <div>
+                    <label for="settingDrop_opticNightSights" class="block text-[11px] text-slate-400 mb-1">Night Sights ($)</label>
+                    <input type="number" id="settingDrop_opticNightSights" step="1" value="35" class="w-full bg-gunmetal-800 border border-gunmetal-600 rounded px-2 py-1 text-emerald-400 font-mono text-xs focus:outline-none focus:border-brass-500">
+                  </div>
+                  <div>
+                    <label for="settingDrop_opticBudgetDot" class="block text-[11px] text-slate-400 mb-1">Budget Dot ($)</label>
+                    <input type="number" id="settingDrop_opticBudgetDot" step="1" value="110" class="w-full bg-gunmetal-800 border border-gunmetal-600 rounded px-2 py-1 text-emerald-400 font-mono text-xs focus:outline-none focus:border-brass-500">
+                  </div>
+                  <div>
+                    <label for="settingDrop_opticPremiumDot" class="block text-[11px] text-slate-400 mb-1">Premium Dot ($)</label>
+                    <input type="number" id="settingDrop_opticPremiumDot" step="1" value="240" class="w-full bg-gunmetal-800 border border-gunmetal-600 rounded px-2 py-1 text-emerald-400 font-mono text-xs focus:outline-none focus:border-brass-500">
+                  </div>
+                  <div>
+                    <label for="settingDrop_opticHuntingScope" class="block text-[11px] text-slate-400 mb-1">Hunting Scope ($)</label>
+                    <input type="number" id="settingDrop_opticHuntingScope" step="1" value="150" class="w-full bg-gunmetal-800 border border-gunmetal-600 rounded px-2 py-1 text-emerald-400 font-mono text-xs focus:outline-none focus:border-brass-500">
+                  </div>
+                </div>
+              </div>
+
+              <!-- 4. Modifications & Stippling -->
+              <div class="bg-gunmetal-900/80 p-3 rounded-lg border border-gunmetal-700 space-y-2">
+                <span class="font-bold text-slate-200 text-xs block border-b border-gunmetal-700 pb-1">Modifications &amp; Stippling</span>
+                <div class="grid grid-cols-3 gap-2">
+                  <div>
+                    <label for="settingDrop_modCerakote" class="block text-[11px] text-slate-400 mb-1">Pro Cerakote ($)</label>
+                    <input type="number" id="settingDrop_modCerakote" step="1" value="25" class="w-full bg-gunmetal-800 border border-gunmetal-600 rounded px-2 py-1 text-emerald-400 font-mono text-xs focus:outline-none focus:border-brass-500">
+                  </div>
+                  <div>
+                    <label for="settingDrop_modStippling" class="block text-[11px] text-slate-400 mb-1">Stippling/Dremel ($)</label>
+                    <input type="number" id="settingDrop_modStippling" step="1" value="-40" class="w-full bg-gunmetal-800 border border-gunmetal-600 rounded px-2 py-1 text-rose-400 font-mono text-xs focus:outline-none focus:border-brass-500">
+                  </div>
+                  <div>
+                    <label for="settingDrop_modPaintTrigger" class="block text-[11px] text-slate-400 mb-1">Paint/Non-OEM ($)</label>
+                    <input type="number" id="settingDrop_modPaintTrigger" step="1" value="-50" class="w-full bg-gunmetal-800 border border-gunmetal-600 rounded px-2 py-1 text-rose-400 font-mono text-xs focus:outline-none focus:border-brass-500">
+                  </div>
+                </div>
+              </div>
+
+              <!-- 5. Shop Reconditioning / Cleaning Deductible -->
+              <div class="bg-gunmetal-900/80 p-3 rounded-lg border border-gunmetal-700 space-y-2">
+                <span class="font-bold text-slate-200 text-xs block border-b border-gunmetal-700 pb-1">Shop Reconditioning / Cleaning Deductible ($)</span>
+                <div class="grid grid-cols-3 gap-2">
+                  <div>
+                    <label for="settingDrop_reconStandard" class="block text-[11px] text-slate-400 mb-1">Wipe &amp; Sonic Fee ($)</label>
+                    <input type="number" id="settingDrop_reconStandard" step="1" min="0" value="20" class="w-full bg-gunmetal-800 border border-gunmetal-600 rounded px-2 py-1 text-amber-400 font-mono text-xs focus:outline-none focus:border-brass-500">
+                  </div>
+                  <div>
+                    <label for="settingDrop_reconHeavy" class="block text-[11px] text-slate-400 mb-1">Heavy Rust/Deep ($)</label>
+                    <input type="number" id="settingDrop_reconHeavy" step="1" min="0" value="45" class="w-full bg-gunmetal-800 border border-gunmetal-600 rounded px-2 py-1 text-amber-400 font-mono text-xs focus:outline-none focus:border-brass-500">
+                  </div>
+                  <div>
+                    <label for="settingDrop_reconGunsmith" class="block text-[11px] text-slate-400 mb-1">Gunsmith/Springs ($)</label>
+                    <input type="number" id="settingDrop_reconGunsmith" step="1" min="0" value="65" class="w-full bg-gunmetal-800 border border-gunmetal-600 rounded px-2 py-1 text-amber-400 font-mono text-xs focus:outline-none focus:border-brass-500">
+                  </div>
+                </div>
+              </div>
+
+              <!-- 6. Weapon Light / Laser Included -->
+              <div class="bg-gunmetal-900/80 p-3 rounded-lg border border-gunmetal-700 space-y-2">
+                <span class="font-bold text-slate-200 text-xs block border-b border-gunmetal-700 pb-1">Weapon Light / Laser Included</span>
+                <div class="grid grid-cols-3 gap-2">
+                  <div>
+                    <label for="settingDrop_lightStreamlight" class="block text-[11px] text-slate-400 mb-1">Streamlight TLR ($)</label>
+                    <input type="number" id="settingDrop_lightStreamlight" step="1" value="45" class="w-full bg-gunmetal-800 border border-gunmetal-600 rounded px-2 py-1 text-emerald-400 font-mono text-xs focus:outline-none focus:border-brass-500">
+                  </div>
+                  <div>
+                    <label for="settingDrop_lightSurefire" class="block text-[11px] text-slate-400 mb-1">SureFire / Modlite ($)</label>
+                    <input type="number" id="settingDrop_lightSurefire" step="1" value="110" class="w-full bg-gunmetal-800 border border-gunmetal-600 rounded px-2 py-1 text-emerald-400 font-mono text-xs focus:outline-none focus:border-brass-500">
+                  </div>
+                  <div>
+                    <label for="settingDrop_lightBudgetLaser" class="block text-[11px] text-slate-400 mb-1">Budget / CT Laser ($)</label>
+                    <input type="number" id="settingDrop_lightBudgetLaser" step="1" value="20" class="w-full bg-gunmetal-800 border border-gunmetal-600 rounded px-2 py-1 text-emerald-400 font-mono text-xs focus:outline-none focus:border-brass-500">
+                  </div>
+                </div>
+              </div>
+
+              <!-- 7. Threaded Barrel / Holster / Grips -->
+              <div class="bg-gunmetal-900/80 p-3 rounded-lg border border-gunmetal-700 space-y-2">
+                <span class="font-bold text-slate-200 text-xs block border-b border-gunmetal-700 pb-1">Threaded Barrel / Holster / Grips</span>
+                <div class="grid grid-cols-3 gap-2">
+                  <div>
+                    <label for="settingDrop_accThreadedBarrel" class="block text-[11px] text-slate-400 mb-1">Threaded Barrel ($)</label>
+                    <input type="number" id="settingDrop_accThreadedBarrel" step="1" value="55" class="w-full bg-gunmetal-800 border border-gunmetal-600 rounded px-2 py-1 text-emerald-400 font-mono text-xs focus:outline-none focus:border-brass-500">
+                  </div>
+                  <div>
+                    <label for="settingDrop_accKydexHolster" class="block text-[11px] text-slate-400 mb-1">Kydex / Safariland ($)</label>
+                    <input type="number" id="settingDrop_accKydexHolster" step="1" value="25" class="w-full bg-gunmetal-800 border border-gunmetal-600 rounded px-2 py-1 text-emerald-400 font-mono text-xs focus:outline-none focus:border-brass-500">
+                  </div>
+                  <div>
+                    <label for="settingDrop_accCustomGrips" class="block text-[11px] text-slate-400 mb-1">VZ/Lok/Wood Grips ($)</label>
+                    <input type="number" id="settingDrop_accCustomGrips" step="1" value="35" class="w-full bg-gunmetal-800 border border-gunmetal-600 rounded px-2 py-1 text-emerald-400 font-mono text-xs focus:outline-none focus:border-brass-500">
+                  </div>
+                </div>
+              </div>
+
+              <!-- 8. Parts & Serial Number Match -->
+              <div class="bg-gunmetal-900/80 p-3 rounded-lg border border-gunmetal-700 space-y-2">
+                <span class="font-bold text-slate-200 text-xs block border-b border-gunmetal-700 pb-1">Parts &amp; Serial Number Match</span>
+                <div class="grid grid-cols-3 gap-2">
+                  <div>
+                    <label for="settingDrop_serialMilsurpBonus" class="block text-[11px] text-slate-400 mb-1">Milsurp Bonus ($)</label>
+                    <input type="number" id="settingDrop_serialMilsurpBonus" step="1" value="65" class="w-full bg-gunmetal-800 border border-gunmetal-600 rounded px-2 py-1 text-emerald-400 font-mono text-xs focus:outline-none focus:border-brass-500">
+                  </div>
+                  <div>
+                    <label for="settingDrop_serialMismatch" class="block text-[11px] text-slate-400 mb-1">Mismatched Parts ($)</label>
+                    <input type="number" id="settingDrop_serialMismatch" step="1" value="-45" class="w-full bg-gunmetal-800 border border-gunmetal-600 rounded px-2 py-1 text-rose-400 font-mono text-xs focus:outline-none focus:border-brass-500">
+                  </div>
+                  <div>
+                    <label for="settingDrop_serialImportMark" class="block text-[11px] text-slate-400 mb-1">Import/Force-Match ($)</label>
+                    <input type="number" id="settingDrop_serialImportMark" step="1" value="-75" class="w-full bg-gunmetal-800 border border-gunmetal-600 rounded px-2 py-1 text-rose-400 font-mono text-xs focus:outline-none focus:border-brass-500">
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -1341,6 +1599,10 @@
           <div class="flex justify-between border-b border-slate-100 py-1">
             <span class="text-slate-500">Customer Name:</span>
             <span id="slipCustomer" class="font-medium text-slate-800">Valued Walk-In Customer</span>
+          </div>
+          <div class="flex justify-between border-b border-slate-100 py-1">
+            <span class="text-slate-500">Customer Phone:</span>
+            <span id="slipCustomerPhone" class="font-mono text-slate-800">N/A</span>
           </div>
         </div>
 
@@ -1430,6 +1692,7 @@
           </div>
           <div class="flex justify-between">
             <span>Name: <strong id="fflSellerName">John Doe</strong></span>
+            <span>Phone: <strong id="fflSellerPhone" class="font-mono">N/A</strong></span>
             <span>Date: <strong id="fflDate"></strong></span>
           </div>
           <div class="pt-1 flex justify-between text-[11px] text-slate-700">
@@ -1875,6 +2138,33 @@
       { id: 'k98k', make: 'Mauser', model: 'Karabiner 98k', caliber: '8x57mm IS', category: 'Milsurp', wholesale: 0, msrp: 0, usedBase: 900, velocity: 'Moderate' }
     ];
 
+    const DEFAULT_DROPDOWN_PRICING = {
+      boxCase: 35,
+      boxCardboard: 15,
+      mag3Plus: 25,
+      mag1Only: -20,
+      mag0None: -40,
+      opticNightSights: 35,
+      opticBudgetDot: 110,
+      opticPremiumDot: 240,
+      opticHuntingScope: 150,
+      modCerakote: 25,
+      modStippling: -40,
+      modPaintTrigger: -50,
+      reconStandard: 20,
+      reconHeavy: 45,
+      reconGunsmith: 65,
+      lightStreamlight: 45,
+      lightSurefire: 110,
+      lightBudgetLaser: 20,
+      accThreadedBarrel: 55,
+      accKydexHolster: 25,
+      accCustomGrips: 35,
+      serialMilsurpBonus: 65,
+      serialMismatch: -45,
+      serialImportMark: -75
+    };
+
     // --- APPLICATION STATE ---
     let state = {
       catalog: [],
@@ -1884,10 +2174,19 @@
         clerkName: '',
         stationName: '',
         cashPercent: 65,
-        tradeBonus: 15,
-        consignmentFee: 15,
+        tradeBonus: 10,
+        consignmentFee: 50,
         maxNegotiationSlack: 7,
-        guaranteeDays: 7
+        guaranteeDays: 7,
+        conditionMargins: {
+          NIB: 5,
+          EXC: -5,
+          VG: -15,
+          GOOD: -25,
+          FAIR: -40,
+          POOR: -60
+        },
+        dropdownPricing: { ...DEFAULT_DROPDOWN_PRICING }
       },
       currentAppraisal: {
         make: 'Glock',
@@ -1895,7 +2194,9 @@
         caliber: '9mm',
         category: 'Handgun - Semi-Auto',
         serial: '',
-        customerName: 'Walk-In Customer',
+        customerName: '',
+        customerPhone: '',
+        specialCustomer: false,
         wholesaleCost: 475,
         newMSRP: 599,
         usedMarketBase: 460,
@@ -1931,7 +2232,9 @@
         state.catalog = cat ? JSON.parse(cat) : [...DEFAULT_CATALOG];
 
         const log = localStorage.getItem('gunval_log');
-        state.intakeLog = log ? JSON.parse(log) : [];
+        const parsedLog = log ? JSON.parse(log) : [];
+        const exampleNames = ['Marcus Vance', 'David K. Henderson', 'Thomas Wright'];
+        state.intakeLog = parsedLog.filter(item => !exampleNames.includes(item.customer));
 
         const sett = localStorage.getItem('gunval_settings');
         if (sett) {
@@ -1939,71 +2242,23 @@
           if (parsed.storeName === 'Frontier Arms & Outdoors') parsed.storeName = 'Center Mass Defense';
           if (parsed.clerkName === 'J. Miller') parsed.clerkName = '';
           if (parsed.stationName === 'Counter #1') parsed.stationName = '';
+          if (parsed.tradeBonus === 15) parsed.tradeBonus = 10;
+          if (parsed.consignmentFee === 15) parsed.consignmentFee = 50;
+          if (!parsed.conditionMargins) {
+            parsed.conditionMargins = { NIB: 5, EXC: -5, VG: -15, GOOD: -25, FAIR: -40, POOR: -60 };
+          }
+          parsed.dropdownPricing = Object.assign({}, DEFAULT_DROPDOWN_PRICING, parsed.dropdownPricing || {});
           state.settings = Object.assign(state.settings, parsed);
         }
+        saveStateToStorage();
       } catch (e) {
         state.catalog = [...DEFAULT_CATALOG];
         state.intakeLog = [];
       }
-
-      // If intake log is empty, pre-populate 3 realistic walk-in appraisals from today for instant demonstration
-      if (!state.intakeLog || state.intakeLog.length === 0) {
-        seedInitialLogData();
-      }
     }
 
     function seedInitialLogData() {
-      const now = new Date();
-      state.intakeLog = [
-        {
-          id: 'APP-' + Math.floor(1000 + Math.random() * 9000),
-          timestamp: new Date(now.getTime() - 42 * 60000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-          date: now.toLocaleDateString(),
-          customer: 'Marcus Vance',
-          make: 'Glock',
-          model: '19 Gen 5',
-          caliber: '9mm',
-          serial: 'BXYZ892',
-          condition: 'Very Good (85%)',
-          usedRetail: 406,
-          cashOffer: 264,
-          tradeOffer: 304,
-          status: 'Accepted - Cash',
-          notes: 'Standard holster wear. Paid check #4891.'
-        },
-        {
-          id: 'APP-' + Math.floor(1000 + Math.random() * 9000),
-          timestamp: new Date(now.getTime() - 110 * 60000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-          date: now.toLocaleDateString(),
-          customer: 'David K. Henderson',
-          make: 'Henry Repeating Arms',
-          model: 'Big Boy Classic .357',
-          caliber: '.357 Mag / .38',
-          serial: 'BB004812M',
-          condition: 'Excellent (95%)',
-          usedRetail: 820,
-          cashOffer: 533,
-          tradeOffer: 613,
-          status: 'Accepted - Trade',
-          notes: 'Customer traded towards Tikka T3x Lite hunting rifle.'
-        },
-        {
-          id: 'APP-' + Math.floor(1000 + Math.random() * 9000),
-          timestamp: new Date(now.getTime() - 215 * 60000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-          date: now.toLocaleDateString(),
-          customer: 'Thomas Wright',
-          make: 'Mossberg',
-          model: '500 Field/Security Combo',
-          caliber: '12 Gauge',
-          serial: 'U881029',
-          condition: 'Good (75%)',
-          usedRetail: 275,
-          cashOffer: 179,
-          tradeOffer: 206,
-          status: 'Declined - Customer Walked',
-          notes: 'Customer wanted $250 cash. Walked away.'
-        }
-      ];
+      state.intakeLog = [];
       saveStateToStorage();
     }
 
@@ -2122,16 +2377,16 @@
       const storeCashProfit = netUsedRetail - storeCashOffer;
       const cashGrossMargin = netUsedRetail > 0 ? ((storeCashProfit / netUsedRetail) * 100).toFixed(1) : 0;
 
-      // 4. Store Trade-In Credit Offer (Cash + Trade Bonus %)
-      const tradeBonusRate = (state.settings.tradeBonus || 15) / 100;
+      // 4. Trade-In Offer (Cash + Trade Bonus %)
+      const tradeBonusVal = (state.settings.tradeBonus !== undefined) ? state.settings.tradeBonus : 10;
+      const tradeBonusRate = tradeBonusVal / 100;
       const storeTradeOffer = Math.round(storeCashOffer * (1 + tradeBonusRate));
       const tradeDelta = storeTradeOffer - storeCashOffer;
       const tradeGrossMargin = netUsedRetail > 0 ? (((netUsedRetail - storeTradeOffer) / netUsedRetail) * 100).toFixed(1) : 0;
 
-      // 5. Consignment Estimate (Store retail minus consignment fee)
-      const consignmentFeeRate = (state.settings.consignmentFee || 15) / 100;
-      const consignmentStoreFee = Math.round(rawUsedRetail * consignmentFeeRate);
-      const consignmentCustomerPayout = rawUsedRetail - consignmentStoreFee;
+      // 5. Consignment Estimate (Store retail minus flat dollar consignment store fee)
+      const consignmentStoreFee = (state.settings.consignmentFee !== undefined) ? state.settings.consignmentFee : 50;
+      const consignmentCustomerPayout = Math.max(0, rawUsedRetail - consignmentStoreFee);
 
       // 6. Negotiation Range (Conservative Low, Recommended Target, Max Ceiling)
       const rangeLow = Math.round(storeCashOffer * 0.91);
@@ -2161,13 +2416,19 @@
       document.getElementById('calcTradeMargin').textContent = `${tradeGrossMargin}%`;
 
       document.getElementById('calcConsignmentPayout').textContent = `$${consignmentCustomerPayout.toFixed(2)}`;
+      if (document.getElementById('displayConsignmentFeeLabel')) {
+        document.getElementById('displayConsignmentFeeLabel').textContent = `$${consignmentStoreFee}`;
+      }
+      if (document.getElementById('calcConsignmentFeeAmount')) {
+        document.getElementById('calcConsignmentFeeAmount').textContent = `$${consignmentStoreFee.toFixed(2)}`;
+      }
 
       document.getElementById('calcRangeLow').textContent = `$${rangeLow.toFixed(2)}`;
       document.getElementById('calcRangeTarget').textContent = `$${rangeTarget.toFixed(2)}`;
       document.getElementById('calcRangeHigh').textContent = `$${rangeHigh.toFixed(2)}`;
 
       document.getElementById('sliderMarginValue').textContent = `${marginSlider}% Cash Offer (${(100 - marginSlider)}% Margin)`;
-      document.getElementById('displayTradeBonusPct').textContent = `+${state.settings.tradeBonus}%`;
+      document.getElementById('displayTradeBonusPct').textContent = `${tradeBonusVal}%`;
 
       return {
         make,
@@ -2191,7 +2452,110 @@
       'POOR': { label: 'Poor (< 60%)', blurb: 'Extensive wear or rust. May require repair or replacement parts. Evaluated as project or parts gun.', mult: 0.40 }
     };
 
+    function syncConditionMarginsUI() {
+      const cm = state.settings.conditionMargins || { NIB: 5, EXC: -5, VG: -15, GOOD: -25, FAIR: -40, POOR: -60 };
+      const grades = ['NIB', 'EXC', 'VG', 'GOOD', 'FAIR', 'POOR'];
+      grades.forEach(g => {
+        const pct = (cm[g] !== undefined) ? parseFloat(cm[g]) : 0;
+        const mult = Math.max(0.05, +(1 + (pct / 100)).toFixed(4));
+        if (GRADE_METADATA[g]) {
+          GRADE_METADATA[g].mult = mult;
+        }
+        const btn = document.querySelector(`.grade-btn[data-grade="${g}"]`);
+        if (btn) {
+          btn.setAttribute('data-mult', mult.toFixed(2));
+          const spans = btn.querySelectorAll('span');
+          if (spans.length >= 3) {
+            spans[2].textContent = (pct >= 0 ? `+${pct}%` : `${pct}%`);
+          }
+        }
+        const inputEl = document.getElementById(`settingCond${g}`);
+        if (inputEl && document.activeElement !== inputEl) {
+          inputEl.value = pct;
+        }
+      });
+      const currentGrade = state.currentAppraisal.grade || 'VG';
+      if (GRADE_METADATA[currentGrade]) {
+        state.currentAppraisal.gradeMultiplier = GRADE_METADATA[currentGrade].mult;
+        const badge = document.getElementById('gradeMultiplierBadge');
+        if (badge) badge.textContent = `${GRADE_METADATA[currentGrade].mult.toFixed(2)}x`;
+      }
+    }
+
+    function formatSignedDollar(val, suffix = '') {
+      const n = parseFloat(val) || 0;
+      const absVal = Math.abs(n);
+      const sign = n >= 0 ? '+' : '-';
+      return `${sign} $${absVal}${suffix ? ' ' + suffix : ''}`;
+    }
+
+    function updateSelectOptionPreserveSelection(selectId, optionIndex, newValue, newLabel) {
+      const sel = document.getElementById(selectId);
+      if (!sel || !sel.options[optionIndex]) return;
+      const prevIdx = sel.selectedIndex;
+      sel.options[optionIndex].value = String(newValue);
+      sel.options[optionIndex].textContent = newLabel;
+      sel.selectedIndex = prevIdx;
+    }
+
+    function syncDropdownPricingUI() {
+      const dp = Object.assign({}, DEFAULT_DROPDOWN_PRICING, state.settings.dropdownPricing || {});
+      state.settings.dropdownPricing = dp;
+
+      // Sync settings form inputs
+      Object.keys(DEFAULT_DROPDOWN_PRICING).forEach(key => {
+        const inputEl = document.getElementById(`settingDrop_${key}`);
+        if (inputEl && document.activeElement !== inputEl) {
+          inputEl.value = dp[key];
+        }
+      });
+
+      // 1. Original Box & Paperwork (#selectBoxPapers)
+      updateSelectOptionPreserveSelection('selectBoxPapers', 0, dp.boxCase, `Original Factory Case + Manuals (${formatSignedDollar(dp.boxCase)})`);
+      updateSelectOptionPreserveSelection('selectBoxPapers', 1, dp.boxCardboard, `Factory Cardboard / Partial Docs (${formatSignedDollar(dp.boxCardboard)})`);
+
+      // 2. Included Magazines (#selectMagazineAdjustment)
+      updateSelectOptionPreserveSelection('selectMagazineAdjustment', 0, dp.mag3Plus, `3+ Factory Magazines (${formatSignedDollar(dp.mag3Plus)})`);
+      updateSelectOptionPreserveSelection('selectMagazineAdjustment', 2, dp.mag1Only, `1 Magazine Only (${formatSignedDollar(dp.mag1Only, 'deduction')})`);
+      updateSelectOptionPreserveSelection('selectMagazineAdjustment', 3, dp.mag0None, `0 Magazines Included (${formatSignedDollar(dp.mag0None, 'deduction')})`);
+
+      // 3. Mounted Optic / Sight Upgrades (#selectOpticsAccessory)
+      updateSelectOptionPreserveSelection('selectOpticsAccessory', 1, dp.opticNightSights, `Aftermarket Night Sights (${formatSignedDollar(dp.opticNightSights)})`);
+      updateSelectOptionPreserveSelection('selectOpticsAccessory', 2, dp.opticBudgetDot, `Quality Budget Dot (Holosun/Vortex ${formatSignedDollar(dp.opticBudgetDot)})`);
+      updateSelectOptionPreserveSelection('selectOpticsAccessory', 3, dp.opticPremiumDot, `Premium Red Dot (Trijicon RMR/Aimpoint ${formatSignedDollar(dp.opticPremiumDot)})`);
+      updateSelectOptionPreserveSelection('selectOpticsAccessory', 4, dp.opticHuntingScope, `Hunting Scope Mounted (${formatSignedDollar(dp.opticHuntingScope)})`);
+
+      // 4. Modifications & Stippling (#selectModifications)
+      updateSelectOptionPreserveSelection('selectModifications', 1, dp.modCerakote, `Professional Factory Cerakote (${formatSignedDollar(dp.modCerakote)})`);
+      updateSelectOptionPreserveSelection('selectModifications', 2, dp.modStippling, `Amateur Stippling / Dremel Work (${formatSignedDollar(dp.modStippling, 'penalty')})`);
+      updateSelectOptionPreserveSelection('selectModifications', 3, dp.modPaintTrigger, `Rattle-Can Paint / Non-OEM Trigger (${formatSignedDollar(dp.modPaintTrigger, 'penalty')})`);
+
+      // 5. Shop Reconditioning / Cleaning (#selectReconditioningFee) - stored as positive fee deducted from retail
+      const rStd = Math.abs(parseFloat(dp.reconStandard) || 0);
+      const rHvy = Math.abs(parseFloat(dp.reconHeavy) || 0);
+      const rGun = Math.abs(parseFloat(dp.reconGunsmith) || 0);
+      updateSelectOptionPreserveSelection('selectReconditioningFee', 1, rStd, `Standard Wipe & Sonic Clean (- $${rStd})`);
+      updateSelectOptionPreserveSelection('selectReconditioningFee', 2, rHvy, `Heavy Rust Removal / Deep Service (- $${rHvy})`);
+      updateSelectOptionPreserveSelection('selectReconditioningFee', 3, rGun, `Gunsmith Fix Needed / Springs (- $${rGun})`);
+
+      // 6. Weapon Light / Laser Included (#selectLightLaser)
+      updateSelectOptionPreserveSelection('selectLightLaser', 1, dp.lightStreamlight, `Streamlight TLR-1 / TLR-7 (${formatSignedDollar(dp.lightStreamlight)})`);
+      updateSelectOptionPreserveSelection('selectLightLaser', 2, dp.lightSurefire, `SureFire X300 / Modlite (${formatSignedDollar(dp.lightSurefire)})`);
+      updateSelectOptionPreserveSelection('selectLightLaser', 3, dp.lightBudgetLaser, `Budget / Crimson Trace Laser (${formatSignedDollar(dp.lightBudgetLaser)})`);
+
+      // 7. Threaded Barrel / Holster / Grips (#selectBarrelHolster)
+      updateSelectOptionPreserveSelection('selectBarrelHolster', 1, dp.accThreadedBarrel, `Factory Threaded Barrel (${formatSignedDollar(dp.accThreadedBarrel)})`);
+      updateSelectOptionPreserveSelection('selectBarrelHolster', 2, dp.accKydexHolster, `Quality Kydex / Safariland Holster (${formatSignedDollar(dp.accKydexHolster)})`);
+      updateSelectOptionPreserveSelection('selectBarrelHolster', 3, dp.accCustomGrips, `VZ / Lok / Wood Target Grips (${formatSignedDollar(dp.accCustomGrips)})`);
+
+      // 8. Parts & Serial Number Match (#selectSerialMatch)
+      updateSelectOptionPreserveSelection('selectSerialMatch', 1, dp.serialMilsurpBonus, `All-Matching Collectible Milsurp Bonus (${formatSignedDollar(dp.serialMilsurpBonus)})`);
+      updateSelectOptionPreserveSelection('selectSerialMatch', 2, dp.serialMismatch, `Mismatched Slide / Bolt / Replacement Barrel (${formatSignedDollar(dp.serialMismatch)})`);
+      updateSelectOptionPreserveSelection('selectSerialMatch', 3, dp.serialImportMark, `Import Mark / Force-Matched Collector Deduct (${formatSignedDollar(dp.serialImportMark)})`);
+    }
+
     function initGradeButtons() {
+      syncConditionMarginsUI();
       const buttons = document.querySelectorAll('.grade-btn');
       buttons.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -2275,6 +2639,11 @@
       document.getElementById('inputCaliber').value = '';
       document.getElementById('inputSerial').value = '';
       document.getElementById('inputCustomerName').value = '';
+      if (document.getElementById('inputCustomerPhone')) document.getElementById('inputCustomerPhone').value = '';
+      if (document.getElementById('chkSpecialCustomer')) {
+        document.getElementById('chkSpecialCustomer').checked = false;
+        document.getElementById('specialCustomerBadge')?.classList.add('hidden');
+      }
       if (document.getElementById('inputSellerDl')) document.getElementById('inputSellerDl').value = '';
       if (typeof window.clearSellerDlPhoto === 'function') window.clearSellerDlPhoto(true);
       document.getElementById('inputWholesaleCost').value = '400';
@@ -2398,6 +2767,7 @@
             </td>
             <td class="py-2.5 px-3 font-semibold text-slate-200">
               <div>${item.customer || 'Walk-In'}</div>
+              ${item.customerPhone ? `<div class="text-[10px] font-mono text-brass-400">${item.customerPhone}</div>` : ''}
               <div class="flex items-center gap-1 mt-0.5">
                 ${item.sellerDl ? `<span class="text-[10px] font-mono text-slate-400">DL: ${item.sellerDl}</span>` : ''}
                 ${item.sellerDlPhoto ? `<span class="px-1.5 py-0.2 rounded text-[9px] font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">ID Photo</span>` : ''}
@@ -2499,8 +2869,15 @@
     // Save Current Appraisal to Intake Log
     function saveCurrentAppraisalToLog() {
       const calc = calculateValuation();
+      const custNameInput = document.getElementById('inputCustomerName');
+      const custName = custNameInput.value.trim();
+      if (!custName) {
+        custNameInput.focus();
+        showToast('Customer Name is REQUIRED before saving to the Intake Log', false);
+        return;
+      }
+      const custPhone = (document.getElementById('inputCustomerPhone')?.value || '').trim();
       const serial = document.getElementById('inputSerial').value.trim() || 'SN-PENDING';
-      const custName = document.getElementById('inputCustomerName').value.trim() || 'Walk-In Customer';
       const conditionBadge = document.getElementById('displayConditionBadge').textContent.trim();
 
       const sellerDl = (document.getElementById('inputSellerDl')?.value || '').trim();
@@ -2513,6 +2890,7 @@
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         date: new Date().toLocaleDateString(),
         customer: custName,
+        customerPhone: custPhone,
         sellerDl: sellerDl,
         sellerDlPhoto: state.currentAppraisal.sellerDlPhoto || '',
         barrelLength: barrelLen,
@@ -2586,6 +2964,9 @@
       document.getElementById('slipGunName').textContent = `${data.make} ${data.model} (${data.caliber})`;
       document.getElementById('slipCondition').textContent = data.conditionLabel || 'Very Good';
       document.getElementById('slipCustomer').textContent = data.customerName || 'Valued Customer';
+      if (document.getElementById('slipCustomerPhone')) {
+        document.getElementById('slipCustomerPhone').textContent = data.customerPhone || (document.getElementById('inputCustomerPhone')?.value || '').trim() || 'N/A';
+      }
       document.getElementById('slipCashAmount').textContent = `$${parseFloat(data.cashOffer).toFixed(2)}`;
       document.getElementById('slipTradeAmount').textContent = `$${parseFloat(data.tradeOffer).toFixed(2)}`;
       document.getElementById('slipClerk').textContent = state.settings.clerkName || 'Unassigned';
@@ -2618,6 +2999,9 @@
       document.getElementById('fflType').textContent = data.category || 'Firearm';
       document.getElementById('fflSerial').textContent = data.serial || 'SN-UNVERIFIED';
       document.getElementById('fflSellerName').textContent = data.customerName || 'Walk-In Seller';
+      if (document.getElementById('fflSellerPhone')) {
+        document.getElementById('fflSellerPhone').textContent = data.customerPhone || (document.getElementById('inputCustomerPhone')?.value || '').trim() || 'N/A';
+      }
       document.getElementById('fflDate').textContent = data.date || new Date().toLocaleDateString();
       document.getElementById('fflBuyCost').textContent = `$${parseFloat(data.cashOffer || 0).toFixed(2)}`;
       document.getElementById('fflTargetRetail').textContent = `$${parseFloat(data.usedRetail || 0).toFixed(2)}`;
@@ -2839,6 +3223,36 @@
         showToast(`Added ${newGun.make} ${newGun.model} to catalog`);
       });
 
+      // Special Customer Checkbox (25% Margin => 75% Cash Offer)
+      const chkSpecial = document.getElementById('chkSpecialCustomer');
+      if (chkSpecial) {
+        chkSpecial.addEventListener('change', (e) => {
+          const isSpecial = e.target.checked;
+          state.currentAppraisal.specialCustomer = isSpecial;
+          const badge = document.getElementById('specialCustomerBadge');
+          const sliderEl = document.getElementById('inputOfferPercentSlider');
+          if (isSpecial) {
+            sliderEl.value = 75; // 75% Cash Offer = 25% Store Margin
+            badge?.classList.remove('hidden');
+            showToast('Special Customer applied: Margin set to 25% (75% Cash Offer)');
+          } else {
+            sliderEl.value = state.settings.cashPercent || 65;
+            badge?.classList.add('hidden');
+            showToast(`Reverted to standard store margin (${100 - (state.settings.cashPercent || 65)}%)`);
+          }
+          calculateValuation();
+        });
+      }
+
+      // Uncheck Special Customer if slider is manually moved away from 75
+      document.getElementById('inputOfferPercentSlider')?.addEventListener('input', (e) => {
+        if (chkSpecial && chkSpecial.checked && parseInt(e.target.value, 10) !== 75) {
+          chkSpecial.checked = false;
+          state.currentAppraisal.specialCustomer = false;
+          document.getElementById('specialCustomerBadge')?.classList.add('hidden');
+        }
+      });
+
       // Store Settings Form & Top Bar Station/Clerk Sync
       const syncStationAndClerkUI = () => {
         const stationVal = state.settings.stationName || '';
@@ -2856,22 +3270,34 @@
         if (topClerkSelect && topClerkSelect.value !== clerkVal) topClerkSelect.value = clerkVal;
         if (settingStationEl && settingStationEl.value !== stationVal) settingStationEl.value = stationVal;
         if (settingClerkEl && settingClerkEl.value !== clerkVal) settingClerkEl.value = clerkVal;
+
+        // Style F. Addis in visible red when selected
+        const isFaron = (clerkVal === 'F. Addis');
+        if (topClerkSelect) {
+          topClerkSelect.style.color = isFaron ? '#ef4444' : '';
+        }
+        if (settingClerkEl) {
+          settingClerkEl.style.color = isFaron ? '#ef4444' : '';
+        }
       };
 
-      document.getElementById('topStationInput')?.addEventListener('input', (e) => {
-        state.settings.stationName = e.target.value.trim();
-        syncStationAndClerkUI();
-        saveStateToStorage();
+      window.syncStationAndClerkUI = syncStationAndClerkUI;
+
+      ['change', 'input'].forEach(evtName => {
+        document.getElementById('topStationInput')?.addEventListener(evtName, (e) => {
+          state.settings.stationName = e.target.value.trim();
+          syncStationAndClerkUI();
+          saveStateToStorage();
+        });
+        document.getElementById('settingStationName')?.addEventListener(evtName, (e) => {
+          state.settings.stationName = e.target.value.trim();
+          syncStationAndClerkUI();
+          saveStateToStorage();
+        });
       });
 
       document.getElementById('topClerkSelect')?.addEventListener('change', (e) => {
         state.settings.clerkName = e.target.value;
-        syncStationAndClerkUI();
-        saveStateToStorage();
-      });
-
-      document.getElementById('settingStationName')?.addEventListener('input', (e) => {
-        state.settings.stationName = e.target.value.trim();
         syncStationAndClerkUI();
         saveStateToStorage();
       });
@@ -2882,23 +3308,81 @@
         saveStateToStorage();
       });
 
+      // Live listeners on Physical Condition Margin inputs in Store Settings
+      ['NIB', 'EXC', 'VG', 'GOOD', 'FAIR', 'POOR'].forEach(g => {
+        document.getElementById(`settingCond${g}`)?.addEventListener('input', (e) => {
+          if (!state.settings.conditionMargins) {
+            state.settings.conditionMargins = { NIB: 5, EXC: -5, VG: -15, GOOD: -25, FAIR: -40, POOR: -60 };
+          }
+          const val = parseFloat(e.target.value);
+          if (!isNaN(val)) {
+            state.settings.conditionMargins[g] = val;
+            syncConditionMarginsUI();
+            saveStateToStorage();
+            calculateValuation();
+          }
+        });
+      });
+
+      // Live listeners on Physical Condition Dropdown Pricing inputs in Store Settings
+      Object.keys(DEFAULT_DROPDOWN_PRICING).forEach(key => {
+        document.getElementById(`settingDrop_${key}`)?.addEventListener('input', (e) => {
+          if (!state.settings.dropdownPricing) {
+            state.settings.dropdownPricing = { ...DEFAULT_DROPDOWN_PRICING };
+          }
+          const val = parseFloat(e.target.value);
+          if (!isNaN(val)) {
+            state.settings.dropdownPricing[key] = val;
+            syncDropdownPricingUI();
+            saveStateToStorage();
+            calculateValuation();
+          }
+        });
+      });
+
       document.getElementById('storeSettingsForm').addEventListener('submit', (e) => {
         e.preventDefault();
         state.settings.storeName = document.getElementById('settingStoreName').value.trim() || 'Center Mass Defense';
         state.settings.stationName = (document.getElementById('settingStationName')?.value || '').trim();
         state.settings.clerkName = document.getElementById('settingStationClerk').value.trim();
         state.settings.cashPercent = parseInt(document.getElementById('settingCashPercent').value, 10) || 65;
-        state.settings.tradeBonus = parseInt(document.getElementById('settingTradeBonus').value, 10) || 15;
-        state.settings.consignmentFee = parseInt(document.getElementById('settingConsignmentFee').value, 10) || 15;
+        state.settings.tradeBonus = parseFloat(document.getElementById('settingTradeBonus').value);
+        if (isNaN(state.settings.tradeBonus)) state.settings.tradeBonus = 10;
+        state.settings.consignmentFee = parseFloat(document.getElementById('settingConsignmentFee').value);
+        if (isNaN(state.settings.consignmentFee)) state.settings.consignmentFee = 50;
         state.settings.maxNegotiationSlack = parseInt(document.getElementById('settingMaxNegotiationSlack').value, 10) || 7;
         state.settings.guaranteeDays = parseInt(document.getElementById('settingOfferGuaranteeDays').value, 10) || 7;
 
+        state.settings.conditionMargins = {
+          NIB: parseFloat(document.getElementById('settingCondNIB')?.value) || 0,
+          EXC: parseFloat(document.getElementById('settingCondEXC')?.value) || 0,
+          VG: parseFloat(document.getElementById('settingCondVG')?.value) || 0,
+          GOOD: parseFloat(document.getElementById('settingCondGOOD')?.value) || 0,
+          FAIR: parseFloat(document.getElementById('settingCondFAIR')?.value) || 0,
+          POOR: parseFloat(document.getElementById('settingCondPOOR')?.value) || 0
+        };
+
+        if (!state.settings.dropdownPricing) {
+          state.settings.dropdownPricing = { ...DEFAULT_DROPDOWN_PRICING };
+        }
+        Object.keys(DEFAULT_DROPDOWN_PRICING).forEach(key => {
+          const el = document.getElementById(`settingDrop_${key}`);
+          if (el) {
+            const parsedVal = parseFloat(el.value);
+            state.settings.dropdownPricing[key] = isNaN(parsedVal) ? DEFAULT_DROPDOWN_PRICING[key] : parsedVal;
+          }
+        });
+
         syncStationAndClerkUI();
-        document.getElementById('inputOfferPercentSlider').value = state.settings.cashPercent;
+        syncConditionMarginsUI();
+        syncDropdownPricingUI();
+        if (!document.getElementById('chkSpecialCustomer')?.checked) {
+          document.getElementById('inputOfferPercentSlider').value = state.settings.cashPercent;
+        }
 
         saveStateToStorage();
         calculateValuation();
-        showToast('Store settings & target margins updated');
+        showToast('Store settings, condition margins & target margins updated');
       });
 
       document.getElementById('btnResetSettingsDefaults').addEventListener('click', () => {
@@ -2907,21 +3391,34 @@
           clerkName: '',
           stationName: '',
           cashPercent: 65,
-          tradeBonus: 15,
-          consignmentFee: 15,
+          tradeBonus: 10,
+          consignmentFee: 50,
           maxNegotiationSlack: 7,
-          guaranteeDays: 7
+          guaranteeDays: 7,
+          conditionMargins: {
+            NIB: 5,
+            EXC: -5,
+            VG: -15,
+            GOOD: -25,
+            FAIR: -40,
+            POOR: -60
+          },
+          dropdownPricing: { ...DEFAULT_DROPDOWN_PRICING }
         };
         document.getElementById('settingStoreName').value = state.settings.storeName;
         if (document.getElementById('settingStationName')) document.getElementById('settingStationName').value = '';
         document.getElementById('settingStationClerk').value = '';
         document.getElementById('settingCashPercent').value = 65;
-        document.getElementById('settingTradeBonus').value = 15;
-        document.getElementById('settingConsignmentFee').value = 15;
+        document.getElementById('settingTradeBonus').value = 10;
+        document.getElementById('settingConsignmentFee').value = 50;
         document.getElementById('settingMaxNegotiationSlack').value = 7;
         document.getElementById('settingOfferGuaranteeDays').value = 7;
         syncStationAndClerkUI();
-        document.getElementById('inputOfferPercentSlider').value = 65;
+        syncConditionMarginsUI();
+        syncDropdownPricingUI();
+        if (!document.getElementById('chkSpecialCustomer')?.checked) {
+          document.getElementById('inputOfferPercentSlider').value = 65;
+        }
 
         saveStateToStorage();
         calculateValuation();
@@ -3019,7 +3516,8 @@
       const cat = document.getElementById('inputCategory').value;
       const tier = CATEGORY_MARGIN_TIERS[cat];
       if (tier) {
-        document.getElementById('inputOfferPercentSlider').value = tier.cashPct;
+        const isSpecial = document.getElementById('chkSpecialCustomer')?.checked;
+        document.getElementById('inputOfferPercentSlider').value = isSpecial ? 75 : tier.cashPct;
         const ind = document.getElementById('categoryRuleIndicator');
         if (ind) ind.textContent = `Auto-Tier: ${tier.label}`;
         calculateValuation();
@@ -3054,9 +3552,11 @@
         const netUsedRetail = Math.max(0, rawUsedRetail - reconditioning);
         const storeCashOffer = Math.round(netUsedRetail * (marginSlider / 100));
         const storeCashProfit = netUsedRetail - storeCashOffer;
-        const tradeBonusRate = (state.settings.tradeBonus || 15) / 100;
+        const tradeBonusVal = (state.settings.tradeBonus !== undefined) ? state.settings.tradeBonus : 10;
+        const tradeBonusRate = tradeBonusVal / 100;
         const storeTradeOffer = Math.round(storeCashOffer * (1 + tradeBonusRate));
-        const consignmentCustomerPayout = rawUsedRetail - Math.round(rawUsedRetail * ((state.settings.consignmentFee || 15) / 100));
+        const consignmentStoreFee = (state.settings.consignmentFee !== undefined) ? state.settings.consignmentFee : 50;
+        const consignmentCustomerPayout = Math.max(0, rawUsedRetail - consignmentStoreFee);
 
         document.getElementById('calcAccessoriesNet').textContent = (totalAcc >= 0 ? `+$${totalAcc.toFixed(2)}` : `-$${Math.abs(totalAcc).toFixed(2)}`);
         document.getElementById('calcAdjustedRetail').textContent = `$${rawUsedRetail.toFixed(2)}`;
@@ -4080,6 +4580,9 @@ export default {
       document.getElementById('topStationName').textContent = state.settings.stationName || '';
       document.getElementById('topClerkName').textContent = state.settings.clerkName || '';
       document.getElementById('inputOfferPercentSlider').value = state.settings.cashPercent;
+      if (typeof window.syncStationAndClerkUI === 'function') window.syncStationAndClerkUI();
+      if (typeof syncConditionMarginsUI === 'function') syncConditionMarginsUI();
+      if (typeof syncDropdownPricingUI === 'function') syncDropdownPricingUI();
 
       // Select default Glock 19 preset
       const defaultGlock = state.catalog.find(g => g.id === 'g19g5');
